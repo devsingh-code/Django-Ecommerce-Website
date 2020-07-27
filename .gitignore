@@ -9,6 +9,7 @@ media
 .idea
 .vscode
 .atom 
+static_root
 
 # Backup files # 
 *.bak 
