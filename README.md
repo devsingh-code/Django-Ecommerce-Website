@@ -5,6 +5,25 @@ This project is made using template taken from JustDjango Github master repo. ht
 This is an Ecommerce website project which is fully supported by Django Backend. 
 I would be adding further functionalities to the project.
 
+# Home Page
+
+<p align="center">
+<img src="https://github.com/devsingh-code/Django-Ecommerce-Website/blob/master/HomePage.png">
+</p>
+
+# Product Detail
+
+<p align="center">
+<img src="https://github.com/devsingh-code/Django-Ecommerce-Website/blob/master/Product-Detail.png">
+</p>
+
+# Cart View
+
+<p align="center">
+<img src="https://github.com/devsingh-code/Django-Ecommerce-Website/blob/master/Cart-View.png">
+</p>
+
+
 
 
 <p align="center">
