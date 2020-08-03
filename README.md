@@ -11,21 +11,6 @@ I would be adding further functionalities to the project.
 <img src="https://github.com/devsingh-code/Django-Ecommerce-Website/blob/master/HomePage.png">
 </p>
 
-# Product Detail
-
-<p align="center">
-<img src="https://github.com/devsingh-code/Django-Ecommerce-Website/blob/master/Product-Detail.png">
-</p>
-
-# Cart View
-
-<p align="center">
-<img src="https://github.com/devsingh-code/Django-Ecommerce-Website/blob/master/Cart-View.png">
-</p>
-
-
-
-
 <p align="center">
 
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/devsingh-code/Django-Ecommerce-Website?style=flat-square">
