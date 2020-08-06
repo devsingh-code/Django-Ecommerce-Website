@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'core',
     'cart',
     
+    
 ]
 
 DEFAULT_FROM_EMAIL= env('DEFAULT_FROM_EMAIL')
