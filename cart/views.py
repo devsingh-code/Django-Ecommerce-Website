@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, reverse, redirect
 from django.views import generic
+from django.conf import settings
 from .models import Product, OrderItem, Address
 from .utils import get_or_set_order_session
 from .forms import AddToCartForm, AddressForm
@@ -129,7 +130,7 @@ class CheckOutView(generic.FormView):
         return super(CheckOutView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse("home")
+        return reverse("cart:payment")
 
     def get_form_kwargs(self):
         kwargs = super(CheckOutView, self).get_form_kwargs()
@@ -141,3 +142,31 @@ class CheckOutView(generic.FormView):
         context['order'] = get_or_set_order_session(self.request)
         return context
 
+class PaymentView(generic.TemplateView):
+    template_name = "cart/payment.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(PaymentView, self).get_context_data(**kwargs)
+        context['PAYPAL_CLIENT_ID'] = settings.PAYPAL_CLIENT_ID
+        context['order'] = get_or_set_order_session(self.request)
+        context['CALLBACK_URL'] = self.request.build_absolute_uri(reverse("cart:thank-you"))
+        return context
+
+class ThankYouView(generic.TemplateView):
+    template_name ="cart/thanks.html"   
+
+class ConfirmOrderView(generic.View):
+    def post(self, request, *args, **kwargs):
+        order = get_or_set_order_session(request)
+        body = json.loads(request.body)
+        payment = Payment.objects.create(
+            order=order,
+            successful=True,
+            raw_response=json.dumps(body),
+            amount=float(body["purchase_units"][0]["amount"]["value"]),
+            payment_method='PayPal'
+        )
+        order.ordered = True
+        order.ordered_date = datetime.date.today()
+        order.save()
+        return JsonResponse({"data": "Success"})
