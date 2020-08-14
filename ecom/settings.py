@@ -44,6 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     'crispy_forms',
     'core',
     'cart',
@@ -143,6 +149,20 @@ PAYPAL_CLIENT_ID=env('PAYPAL_SANDBOX_CLIENT_ID')
 PAYPAL_SECRET_KEY=env('PAYPAL_SANDBOX_SECRET_KEY')
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
+
+AUTHENTICATION_BACKENDS = [
+
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+]
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION ='mandatory'
+LOGIN_REDIRECT_URL ='/'
+SITE_ID =1
 
 if DEBUG is False:
     SESSION_COOKIE_SECURE = True
