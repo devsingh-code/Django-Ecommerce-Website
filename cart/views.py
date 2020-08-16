@@ -1,11 +1,14 @@
 from django.shortcuts import get_object_or_404, reverse, redirect
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
-from .models import Product, OrderItem, Address
+from .models import Product, OrderItem, Address, Payment, Order
 from .utils import get_or_set_order_session
 from .forms import AddToCartForm, AddressForm
 from django.contrib import messages
-
+from django.http import JsonResponse
+import json
+import datetime
 
 
 class ProductListView(generic.ListView):
@@ -172,3 +175,9 @@ class ConfirmOrderView(generic.View):
         order.ordered_date = datetime.date.today()
         order.save()
         return JsonResponse({"data": "Success"})
+
+
+class OrderDetailView(LoginRequiredMixin, generic.DetailView):
+    template_name='order_detail.html'
+    queryset = Order.objects.all()
+    context_object_name = 'order'
