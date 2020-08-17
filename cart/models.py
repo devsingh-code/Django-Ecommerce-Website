@@ -63,9 +63,14 @@ class Product(models.Model):
     available_size = models.ManyToManyField(SizeVariation)
     primary_category = models.ForeignKey(Category, related_name='primary_products', on_delete=models.CASCADE)
     secondary_categories = models.ManyToManyField(Category, blank=True)
+    stock = models.IntegerField(default=1)
 
     def __str__(self):
         return self.title
+
+    @property
+    def in_stock(self):
+        return self.stock > 0
 
     def get_absolute_url(self):
         return reverse("cart:product-detail", kwargs={"slug": self.slug})

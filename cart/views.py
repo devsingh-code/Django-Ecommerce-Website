@@ -46,6 +46,8 @@ class ProductDetailView(generic.FormView):
         kwargs["product_id"] = self.get_object().id
         return kwargs
 
+    
+
     def form_valid(self, form):
         order = get_or_set_order_session(self.request)
         product = self.get_object()
@@ -58,6 +60,7 @@ class ProductDetailView(generic.FormView):
 
         if item_filter.exists():
             item = item_filter.first()
+
             item.quantity += int(form.cleaned_data['quantity'])
             item.save()
 
